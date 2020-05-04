@@ -50,3 +50,39 @@ const innerTablesRows = users.map((el,i) => {
 
     return tr;
 })
+// map испульзуем потому, что нам надо вернуть массив внутренностей этой таблицы, 
+// мы берем наш элемент, это наш человечек наш юзер каждый
+const tbody = document.createElement('tbody');
+innerTablesRows.map(el => tbody.appendChild(el));
+/* <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Salary</th>
+                      </tr>
+</thead> */
+const tr = document.createElement('tr');
+const index = document.createElement('th');
+    tr.appendChild(index);
+
+    const name = document.createElement('th');
+    name.innerText ='Name';
+    tr.appendChild(name);
+
+    const gender = document.createElement('th');
+    gender.innerText = 'Gender';
+    tr.appendChild(gender);
+
+    const salary = document.createElement('th');
+    salary.innerText = 'Salary';
+    tr.appendChild(salary);
+
+const thead = document.createElement('thead');
+thead.appendChild(tr);
+
+const table = document.createElement('table');
+table.appendChild(thead);
+table.appendChild(tbody);
+
+document.getElementsByClassName('col-12')[0].appendChild(table);
