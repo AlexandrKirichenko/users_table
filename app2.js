@@ -29,53 +29,42 @@ const users = [
 <td>1500</td>
 </tr> */}
 
+const createElement = (tag, content) => {
+    const element = document.createElement(tag);
+    element.innerText = content;
+
+    return element;
+}
+
+const appendArray = (htmlEl, arrayEls) => {
+    arrayEls.map(el => htmlEl.appendChild(el))
+    return htmlEl;
+}
+
 const innerTablesRows = users.map((el,i) => {
-    const tr = document.createElement('tr'); //наружная обертка
-
-    const index = document.createElement('th');//т.е. мы каждую th или td запихнем в переменные
-    index.innerText = i + 1;
-    tr.appendChild(index);
-
-    const name = document.createElement('td');
-    name.innerText =el.name;
-    tr.appendChild(name);
-
-    const gender = document.createElement('td');
-    gender.innerText = el.gender;
-    tr.appendChild(gender);
-
-    const salary = document.createElement('td');
-    salary.innerText = el.salary;
-    tr.appendChild(salary);
-
-    return tr;
+    // const tr = document.createElement('tr'); //наружная обертка
+    const index = createElement('th',i + 1)
+    const name = createElement('td',el.name)
+    const gender = createElement('td',el.gender)
+    const salary = createElement('td',el.salary)
+  
+    return appendArray(document.createElement('tr'),[index,name,gender,salary]);
 })
-// map испульзуем потому, что нам надо вернуть массив внутренностей этой таблицы, 
-// мы берем наш элемент, это наш человечек наш юзер каждый
+
 const tbody = document.createElement('tbody');
 innerTablesRows.map(el => tbody.appendChild(el));
-/* <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Salary</th>
-                      </tr>
-</thead> */
+
 const tr = document.createElement('tr');
-const index = document.createElement('th');
+const index = createElement('th','#');
     tr.appendChild(index);
 
-    const name = document.createElement('th');
-    name.innerText ='Name';
+    const name = createElement('th','Name');
     tr.appendChild(name);
 
-    const gender = document.createElement('th');
-    gender.innerText = 'Gender';
+    const gender = createElement('th','Gender');
     tr.appendChild(gender);
 
-    const salary = document.createElement('th');
-    salary.innerText = 'Salary';
+    const salary = createElement('th','Salary');
     tr.appendChild(salary);
 
 const thead = document.createElement('thead');
