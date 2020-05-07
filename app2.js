@@ -54,24 +54,15 @@ const innerTablesRows = users.map((el,i) => {
 const tbody = document.createElement('tbody');
 innerTablesRows.map(el => tbody.appendChild(el));
 
-const tr = document.createElement('tr');
-const index = createElement('th','#');
-    tr.appendChild(index);
+const tr = appendArray(document.createElement('tr'),[
+    createElement('th','#'),
+    createElement('th','Name'),
+    createElement('th','Gender'),
+    createElement('th','Salary')
+]);
 
-    const name = createElement('th','Name');
-    tr.appendChild(name);
+const thead = appendArray(document.createElement('thead'),[tr]);
 
-    const gender = createElement('th','Gender');
-    tr.appendChild(gender);
-
-    const salary = createElement('th','Salary');
-    tr.appendChild(salary);
-
-const thead = document.createElement('thead');
-thead.appendChild(tr);
-
-const table = document.createElement('table');
-table.appendChild(thead);
-table.appendChild(tbody);
+const table = appendArray(document.createElement('table'),[thead,tbody]);
 
 document.getElementsByClassName('col-12')[0].appendChild(table);
