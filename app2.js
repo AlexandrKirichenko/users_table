@@ -55,11 +55,10 @@ const tbody = document.createElement('tbody');
 innerTablesRows.map(el => tbody.appendChild(el));
 
 const tr = appendArray(document.createElement('tr'),[
-    createElement('th','#'),
-    createElement('th','Name'),
-    createElement('th','Gender'),
-    createElement('th','Salary')
-]);
+    '#','Name','Gender','Salary'
+]
+    .map(el => createElement('th',el))
+);
 
 const thead = appendArray(document.createElement('thead'),[tr]);
 
