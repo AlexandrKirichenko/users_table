@@ -22,9 +22,10 @@ const users = [
     {name: 'Serj', gender: 'male', salary: '2000'},
 ];
 
-const createElement = (tag, content) => {
+const createElement = (tag, content, className=null) => {
     const element = document.createElement(tag);
     element.innerText = content;
+    element.className = className?className:'';
 
     return element;
 }
@@ -57,6 +58,6 @@ const tr = appendArray(document.createElement('tr'),[
 
 const thead = appendArray(document.createElement('thead'),[tr]);
 
-const table = appendArray(document.createElement('table'),[thead,tbody]);
+const table = appendArray(createElement('table',null,'table'),[thead,tbody]);
 
 document.getElementsByClassName('col-12')[0].appendChild(table);
