@@ -21,13 +21,6 @@ const users = [
     {name: 'Jery', gender: 'female', salary: '1800'},
     {name: 'Serj', gender: 'male', salary: '2000'},
 ];
-// Пробуем сгенерировать(получить) массив 
-{/* <tr>
-<th scope="row">1</th> 
-<td>Mark</td>
-<td>male</td>
-<td>1500</td>
-</tr> */}
 
 const createElement = (tag, content) => {
     const element = document.createElement(tag);
@@ -42,14 +35,16 @@ const appendArray = (htmlEl, arrayEls) => {
 }
 
 const innerTablesRows = users.map((el,i) => {
-    // const tr = document.createElement('tr'); //наружная обертка
-    const index = createElement('th',i + 1)
-    const name = createElement('td',el.name)
-    const gender = createElement('td',el.gender)
-    const salary = createElement('td',el.salary)
-  
-    return appendArray(document.createElement('tr'),[index,name,gender,salary]);
-})
+    return appendArray(
+    document.createElement('tr'),
+    [
+        {tag:'th', value:i + 1},
+        {tag:'td', value:el.name},
+        {tag:'td', value:el.gender},
+        {tag:'td', value:el.salary}
+    ].map(el => createElement(el.tag,el.value))
+    );
+});
 
 const tbody = document.createElement('tbody');
 innerTablesRows.map(el => tbody.appendChild(el));
