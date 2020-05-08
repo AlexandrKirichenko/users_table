@@ -1,13 +1,3 @@
- const sum = [...document.querySelectorAll('tr > td:last-child')].map(el => Number(el.innerHTML)).reduce((acc, el) => acc+el,0) //превратили в массив, и суммируем Salary
- console.log(sum);
-
- const html = document.createElement('div');
- html.innerText = sum + '$';
-// document.getElementsByClassName('col-12')[0].appendChild(html);
-document.querySelector('table > tbody > tr:last-child > td:last-child').appendChild(html);
-// document.querySelector('table > tbody > tr:last-child > td:last-child')
-// .innerText = sum + '$';
-
 const users = [
     {name: 'Mark', gender: 'male', salary: '1500'},
     {name: 'Igor', gender: 'male', salary: '500'},
@@ -24,9 +14,12 @@ const users = [
 
 const createElement = (tag, content, className=null) => {
     const element = document.createElement(tag);
-    element.innerText = content;
+    if(typeof content === 'object'){
+        element.appendChild(content)
+    }else{
+        element.innerText = content;
+    }
     element.className = className?className:'';
-
     return element;
 }
 
@@ -35,6 +28,8 @@ const appendArray = (htmlEl, arrayEls) => {
     return htmlEl;
 }
 
+const button = createElement('button','Delete','btn-btn-danger');
+
 const innerTablesRows = users.map((el,i) => {
     return appendArray(
     document.createElement('tr'),
@@ -42,7 +37,8 @@ const innerTablesRows = users.map((el,i) => {
         {tag:'th', value:i + 1},
         {tag:'td', value:el.name},
         {tag:'td', value:el.gender},
-        {tag:'td', value:el.salary}
+        {tag:'td', value:el.salary},
+        {tag:'td', value:createElement('button','Delete','btn-btn-danger')}
     ].map(el => createElement(el.tag,el.value))
     );
 });
@@ -51,13 +47,18 @@ const tbody = document.createElement('tbody');
 innerTablesRows.map(el => tbody.appendChild(el));
 
 const tr = appendArray(document.createElement('tr'),[
-    '#','Name','Gender','Salary'
+    '#','Name','Gender','Salary','Action',
 ]
     .map(el => createElement('th',el))
 );
 
 const thead = appendArray(document.createElement('thead'),[tr]);
 
-const table = appendArray(createElement('table',null,'table'),[thead,tbody]);
+const table = appendArray(createElement('table','','table'),[thead,tbody]);
 
 document.getElementsByClassName('col-12')[0].appendChild(table);
+
+document.querySelector('button')
+.addEventListener('click', () => {
+    console.log('click')
+})
